@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'contacts_app/css/contacts.css' %}">
+
+    <script type="text/javascript" src="{% static 'contacts_app/js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/commonUtils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/BaseTable.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/ContactsTable.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/Validator.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/ContactBaseForm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/ContactCreateForm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'contacts_app/js/ContactEditForm.js' %}"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		    const formID = "#form";
+			const table = new ContactsTable("#table");
+			new ContactCreateForm(formID);
+			$(window).bind('create_contact edit_contact', function () {
+                table.redrawComments();
+            });
+			$(window).bind('select_contact', function (data, extra) {
+                new ContactEditForm(formID, extra.id);
+            })
+		});
+	</script>
+</head>
+<body>
+    <div class="row">
+        <div id='table' class="col-md-10"></div>
+        <div id='form' class="col-md-2"></div>
+    </div>
+</body>
+</html>
