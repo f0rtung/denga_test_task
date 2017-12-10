@@ -25,6 +25,9 @@
             });
 			$(window).bind('select_contact', function (data, extra) {
                 new ContactEditForm(formID, extra.id);
+            });
+			$(window).bind('change_contact_form', function () {
+                new ContactCreateForm(formID);
             })
 		});
 	</script>

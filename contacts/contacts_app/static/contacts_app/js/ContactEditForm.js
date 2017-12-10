@@ -24,6 +24,18 @@ function ContactEditForm(parentElemSelector, contact_id){
 				}
 			}
 		},
+		"createBtn": {
+			tag: "<input/>",
+			tagOption: {
+				type: "submit",
+				value: "Create new contact",
+				class: "btn btn-primary",
+				click: function (event) {
+					event.preventDefault();
+					self.form.trigger('change_contact_form');
+				}
+			}
+		},
 		"id": {
 			tag: "<input/>",
 			tagOption: {
@@ -32,21 +44,6 @@ function ContactEditForm(parentElemSelector, contact_id){
 			}
 		}
 	};
-
-	const submitOptions =  {
-		tag: "<input/>",
-		tagOption: {
-			type: "submit",
-			value: "Edit",
-			class: "btn btn-primary",
-			click: function (event) {
-				event.preventDefault();
-				if(self.validateFormAction()){
-					ajaxQuery("/contacts/edit_contact/", self.getData(), "post", callback);
-				}
-			}
-		}
-    };
 	ContactBaseForm.call(this, parentElemSelector, additionElements);
 	ajaxQuery("/contacts/contact/" + contact_id + "/", {}, "get",
 			  function (response) { self.setData(response) } );
