@@ -68,7 +68,7 @@ def remove_contact(request):
 def create_contact(request):
     try:
         params = request.POST.dict()
-        birthday = datetime.strptime(params['birthday'], "%d.%m.%Y")
+        birthday = datetime.strptime(params['birthday'], ContactsModel.date_format)
         contact = ContactsModel(first_name=params['first_name'],
                                 middle_name=params['middle_name'],
                                 last_name=params['last_name'],
